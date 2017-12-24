@@ -3,7 +3,8 @@ import {
   StyleSheet,
   Text,
   View,
-  Button
+  Button,
+  Image
 } from 'react-native'
 
 export default class Login extends React.Component {
@@ -12,10 +13,15 @@ export default class Login extends React.Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigate } = this.props.navigation
 
     return (
       <View style={styles.container}>
+        
+        <View style={styles.bgContainer}>
+          <Image source={require('./assets/bgbasketball.jpg')} style={styles.bgImage} />
+        </View>
+
         <Text style={styles.title}>
           Otto NBA
         </Text>
@@ -39,6 +45,20 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     textAlign: 'center',
-    margin: 10
-  }
+    margin: 40,
+    color: 'white'
+  },
+  bgContainer: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+  bgImage: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: 'stretch'
+  },
 })

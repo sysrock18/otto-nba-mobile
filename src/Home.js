@@ -5,15 +5,10 @@ import {
   Button,
   TouchableOpacity
 } from 'react-native'
-import { TabNavigator, DrawerNavigator } from 'react-navigation'
+import { TabNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Login from './Login'
-
-const Scoreboards = () => (
-  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    <Text>Scoreboards</Text>
-  </View>
-)
+import Scoreboards from './Scoreboards'
 
 const Standings = () => (
   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -42,12 +37,6 @@ const Tabs = TabNavigator(
   }
 )
 
-const Drawer = DrawerNavigator({
-  Home: {
-    screen: Tabs
-  }
-});
-
 export default class Home extends React.Component {
   static navigationOptions = {
     title: 'Otto NBA',
@@ -57,19 +46,20 @@ export default class Home extends React.Component {
       shadowOpacity: 0
     },
     headerTitleStyle: {
-      fontWeight: '500',
+      fontWeight: '200',
       color: 'white'
     },
-    headerLeft: (
+    headerTintColor: 'white',
+    headerRight: (
       <TouchableOpacity>
-        <Icon name="ios-basketball" size={30} color="#FA8320" style={{marginLeft: 20}} />
+        <Icon name="ios-basketball-outline" size={30} color="white" style={{marginRight: 20}} />
       </TouchableOpacity>
     )
   }
 
   render() {
     return (
-      <Drawer />
+      <Tabs />
     )
   }
 }

@@ -9,12 +9,7 @@ import { TabNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Login from './Login'
 import Scoreboards from './Scoreboards'
-
-const Standings = () => (
-  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    <Text>Scoreboards</Text>
-  </View>
-)
+import Standings from './Standings'
 
 const Tabs = TabNavigator(
   {

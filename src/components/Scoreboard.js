@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   },
   scoreText: {
     fontSize: 30,
-    color: 'black',
+    color: '#323232',
     marginHorizontal: 5
   },
   nameTeams: {
@@ -91,10 +91,10 @@ const styles = StyleSheet.create({
   },
   nameText: {
     fontSize: 18,
-    color: 'black'
+    color: '#323232'
   },
   dataText: {
-    color: 'black'
+    color: '#323232'
   },
   label: {
     fontWeight: '800'

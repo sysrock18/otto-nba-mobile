@@ -71,7 +71,7 @@ export default class Standings extends React.Component {
 
         { !this.state.standings.length && !this.state.loading && 
           <View style={styles.noResults}>
-            <Text style={styles.textNoResults}>We can't load standings now, try later :(</Text>
+            <Text style={styles.textNoResults}>We cant load standings now, try later :(</Text>
           </View>
         }
       </ScrollView>
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
   },
   conferenceName: {
     fontSize: 24,
-    color: '#0C0C0C'
+    color: '#323232'
   },
   conferenceImage: {
     width: 50,
@@ -126,12 +126,12 @@ const styles = StyleSheet.create({
   },
   teamAvatar: {
     borderRadius: 50,
-    width: 28,
-    height: 28
+    width: 30,
+    height: 30
   },
   rank: {
     width: 20,
-    color: '#0C0C0C'
+    color: '#323232'
   },
   dataTeam: {
     marginLeft: 10
@@ -145,9 +145,11 @@ const styles = StyleSheet.create({
   },
   singleStat: {
     marginRight: 10,
-    color: '#0C0C0C'
+    color: '#323232'
   },
   teamName: {
-    color: '#0C0C0C'
+    color: '#323232',
+    fontSize: 15,
+    marginBottom: 5
   }
 })

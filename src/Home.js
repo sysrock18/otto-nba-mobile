@@ -1,12 +1,5 @@
 import React from 'react'
-import {
-  Text,
-  View,
-  Button,
-  TouchableOpacity
-} from 'react-native'
 import { TabNavigator } from 'react-navigation'
-import Icon from 'react-native-vector-icons/Ionicons'
 import Login from './Login'
 import Scoreboards from './Scoreboards'
 import Standings from './Standings'
@@ -44,12 +37,7 @@ export default class Home extends React.Component {
       fontWeight: '200',
       color: 'white'
     },
-    headerTintColor: 'white',
-    headerRight: (
-      <TouchableOpacity>
-        <Icon name="ios-basketball-outline" size={30} color="white" style={{marginRight: 20}} />
-      </TouchableOpacity>
-    )
+    headerTintColor: 'white'
   }
 
   render() {

@@ -51,7 +51,7 @@ export default class Scoreboards extends React.Component {
 
         { !this.state.scoreboards && !this.state.loading && 
           <View style={styles.noResults}>
-            <Text style={styles.textNoResults}>We can't load scoreboards now, try later :(</Text>
+            <Text style={styles.textNoResults}>We cant load scoreboards now, try later :(</Text>
           </View>
         }
       </View>

@@ -5,7 +5,7 @@ Mobile app version of Otto NBA built in React Native, NBA scores of yesterday an
 
 ### Preview
 
-Live on Expo coming in a moment
+Live on [Expo](https://expo.io/@rockersgz/otto-nba-mobile)
 
 ![Main](screenshots/main.png?raw=true "Main")
 

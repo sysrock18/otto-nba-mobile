@@ -17,15 +17,12 @@ export default class Standings extends React.Component {
   }
 
   async componentDidMount() {
-    const todayDate = new Date()
-    const yesterdayDate = new Date(todayDate.setDate(todayDate.getDate() - 2))
-    const currentSeason = await api.season.getCurrent(yesterdayDate)
     let standings = []
-    if (currentSeason) {
-      const seasonName = currentSeason.slug
-      const standingsResp = await api.conferenceStandings.getList(seasonName)
-      standings = standingsResp ? standingsResp : []
-    }
+    let teams = await api.teams.getList()
+    let teamsObj = {}
+    teams.forEach(team => teamsObj[team.tricode.toLowerCase()] = team)
+    const standingsResp = await api.conferenceStandings.getList()
+    standings = standingsResp ?? []
 
     this.setState({
       standings,
@@ -38,7 +35,7 @@ export default class Standings extends React.Component {
       <ScrollView style={styles.container}>
         { this.state.loading && <ActivityIndicator style={styles.loader} size="large" /> }
 
-        { this.state.standings.map(standing => 
+        {/* { this.state.standings.map(standing => 
           <View key={standing['@name']}>
             <View style={styles.conference}>
               <Image source={logos[standing['@name'].toLowerCase()]} style={styles.conferenceImage} />
@@ -67,7 +64,7 @@ export default class Standings extends React.Component {
               )
             }
           </View>
-        )}
+        )} */}
 
         { !this.state.standings.length && !this.state.loading && 
           <View style={styles.noResults}>

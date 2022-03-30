@@ -1,9 +1,7 @@
-import React from 'react'
-
 const logos = {
   atl: require('./assets/atl.png'),
   bos: require('./assets/bos.png'),
-  bro: require('./assets/bro.png'),
+  bkn: require('./assets/bkn.png'),
   cha: require('./assets/cha.png'),
   chi: require('./assets/chi.png'),
   cle: require('./assets/cle.png'),
@@ -22,7 +20,7 @@ const logos = {
   min: require('./assets/min.png'),
   nop: require('./assets/nop.png'),
   nyk: require('./assets/nyk.png'),
-  okl: require('./assets/okl.png'),
+  okc: require('./assets/okc.png'),
   orl: require('./assets/orl.png'),
   phi: require('./assets/phi.png'),
   phx: require('./assets/phx.png'),

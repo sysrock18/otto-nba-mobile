@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import {
   StyleSheet,
   Text,
@@ -6,47 +6,56 @@ import {
   Image,
 } from 'react-native'
 import logos from '../logos'
+import utils from '../utils'
 
-const Scoreboard = (props) =>
-  <View style={styles.scoreboardBox}>
-    <View style={{alignItems: 'center'}}>
-      <Text style={styles.dataText}>
-        <Text style={styles.label}>Arena:</Text> {props.scoreboard.game.location}
-      </Text>
-      <Text style={styles.dataText}>
-        <Text style={styles.label}>Date:</Text> {props.scoreboard.game.date}
-      </Text>
-    </View>
+function Scoreboard({ scoreboard, teams }) {
+  const startTime = useMemo(() => utils.getGameTime(new Date(scoreboard.startTimeUTC)), [scoreboard.startTimeUTC])
+  const gameDate = useMemo(() => utils.getGameDate(new Date(scoreboard.startTimeUTC)), [scoreboard.startTimeUTC])
+  const hTeamCode = scoreboard.hTeam.triCode.toLowerCase()
+  const vTeamCode = scoreboard.vTeam.triCode.toLowerCase()
 
-    <View style={styles.scoreTeams}>
-      <Image source={logos[props.scoreboard.game.awayTeam.Abbreviation.toLowerCase()]} />
-      
-      <View style={styles.scoreTime}>
-        <View style={styles.score}>
-          <Text style={styles.scoreText}>{props.scoreboard.awayScore}</Text>
-          <Text style={styles.scoreText}>-</Text>
-          <Text style={styles.scoreText}>{props.scoreboard.homeScore}</Text>
-        </View>
+  return (
+    <View style={styles.scoreboardBox}>
+      <View style={{alignItems: 'center'}}>
         <Text style={styles.dataText}>
-          <Text style={styles.label}>Time:</Text> {props.scoreboard.game.time}
+          <Text style={styles.label}>Arena:</Text> {scoreboard.arena?.name}
+        </Text>
+        <Text style={styles.dataText}>
+          <Text style={styles.label}>Date:</Text> {gameDate}
         </Text>
       </View>
 
-      <Image source={logos[props.scoreboard.game.homeTeam.Abbreviation.toLowerCase()]} />
-    </View>
+      <View style={styles.scoreTeams}>
+        <Image source={logos[vTeamCode]} />
+        
+        <View style={styles.scoreTime}>
+          <View style={styles.score}>
+            <Text style={styles.scoreText}>{scoreboard.vTeam?.score}</Text>
+            <Text style={styles.scoreText}>-</Text>
+            <Text style={styles.scoreText}>{scoreboard.hTeam?.score}</Text>
+          </View>
+          <Text style={styles.dataText}>
+            <Text style={styles.label}>Time:</Text> {startTime}
+          </Text>
+        </View>
 
-    <View style={styles.nameTeams}>
-      <View style={{alignItems: 'flex-start'}}>
-        <Text style={styles.nameText}>{props.scoreboard.game.awayTeam.City}</Text>
-        <Text style={styles.nameText}>{props.scoreboard.game.awayTeam.Name}</Text>
+        <Image source={logos[hTeamCode]} />
       </View>
-      <View style={{alignItems: 'flex-end'}}>
-        <Text style={styles.nameText}>{props.scoreboard.game.homeTeam.City}</Text>
-        <Text style={styles.nameText}>{props.scoreboard.game.homeTeam.Name}</Text>
-      </View>
-    </View>
 
-  </View>
+      <View style={styles.nameTeams}>
+        <View style={{alignItems: 'flex-start'}}>
+        <Text style={styles.nameText}>{teams[vTeamCode]?.city}</Text>
+          <Text style={styles.nameText}>{teams[vTeamCode]?.nickname}</Text>
+        </View>
+        <View style={{alignItems: 'flex-end'}}>
+          <Text style={styles.nameText}>{teams[hTeamCode]?.city}</Text>
+          <Text style={styles.nameText}>{teams[hTeamCode]?.nickname}</Text>
+        </View>
+      </View>
+
+    </View>
+  )
+}
 
 const styles = StyleSheet.create({
   scoreboardBox: {

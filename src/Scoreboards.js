@@ -3,8 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
-  Image,
   ActivityIndicator,
   FlatList
 } from 'react-native'
@@ -13,22 +11,28 @@ import Scoreboard from './components/Scoreboard'
 
 export default class Scoreboards extends React.Component {
   state = {
-    scoreboards: null,
-    loading: true
+    scoreboards: [],
+    loading: true,
+    teams: {}
   }
 
   async componentDidMount() {
     const todayDate = new Date()
     const yesterdayDate = new Date(todayDate.setDate(todayDate.getDate() - 1))
-    const currentSeason = await api.season.getCurrent(yesterdayDate)
-    let scoreboards = null
-    if (currentSeason) {
-      const seasonName = currentSeason.slug
-      scoreboards = await api.scoreboards.getList(yesterdayDate, seasonName)
-    }
+    let scoreboards = []
+    let teams = await api.teams.getList()
+    let teamsObj = {}
+    teams.forEach(team => teamsObj[team.tricode.toLowerCase()] = team)
+    let yesterdayGameScores = await api.scoreboards.getList(yesterdayDate)
+    let todayGameScores = await api.scoreboards.getList()
+
+    yesterdayGameScores = yesterdayGameScores ?? []
+    todayGameScores = todayGameScores ?? []
+    scoreboards = [...todayGameScores, ...yesterdayGameScores]
 
     this.setState({
       scoreboards,
+      teams: teamsObj,
       loading: false
     })
   }
@@ -36,14 +40,15 @@ export default class Scoreboards extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        { this.state.loading && <ActivityIndicator style={styles.loader} size="large" /> }
+        { this.state.loading && <ActivityIndicator color={'#1976D2'} style={styles.loader} size="large" /> }
 
         { this.state.scoreboards && 
           <FlatList
             data={this.state.scoreboards}
+            keyExtractor={(item) => item.gameId}
             renderItem={({item}) => {
               return (
-                <Scoreboard scoreboard={item} />
+                <Scoreboard scoreboard={item} teams={this.state.teams} />
               )
             }}
           />
@@ -64,7 +69,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   loader: {
-    marginTop: 10
+    marginTop: 30
   },
   noResults: {
     marginTop: 10,
